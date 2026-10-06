@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie 8</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $("#tekst").text("Nowy tekst");
+            })
+            $("#przelacz").click(function(){
+                $("#pudelko").toggle();
+            })
+            $("#akceptuj").change(function(){
+                if(this.checked){
+                     $("#wyslij").removeAttr("disabled")
+                }else{
+                    $("#wyslij").attr("disabled", "disabled")
+                }
+            })
+            $("li").each(function(number, element){
+                $(element).text((number+1)+". "+$(element).text());
+            })
+            let isLog = true;
+            $("#zaloguj").click(function(){
+                let login = $("#login").val();
+                let password = $("#password").val();
+                if(login != "" || password != ""){
+                    if(login.length < 3){
+                        $("#komunikat").text($("#komunikat").text()+"Login powinen zawierac co najmnie 3 znakow");
+                        isLog = false
+                    }
+                    
+                    if(password.length < 6){
+                        isLog = false
+                        $("#komunikat").text($("#komunikat").text()+"Haslo powino zawierac co najmnie 6 znakow");
+                    }
+                    if(isLog){
+                        $("#komunikat").text("Zalogowano pomyslnie");
+                    }
+                }else{
+                    $("#komunikat").text("Pola nie moag byc puste");
+                }
+                
+            })
+        })
+    </script>
+</head>
+<body>
+    <p id="tekst">Stary tekst</p>
+    <button id="btn">Zmien</button>
+    <div id="pudelko" style="width: 200px; height: 200px; background-color: red;"></div>
+    <button id="przelacz">Pokaz/ukryj</button>
+    <label><input type="checkbox" id="akceptuj">Regulamin</label>
+    <button id="wyslij" disabled>Wuslij</button>
+    <ol id="menu">
+        <li>Strona glowna</li>
+        <li>O nas</li>
+        <li>Kontakt</li>
+    </ol>
+    <input type="text" id="login">
+    <input type="password" id="haslo">
+    <button id="zaloguj">Zaloguj</button>
+    <p id="komunikat"></p>
+</body>
+</html>
