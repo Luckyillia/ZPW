@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie 9</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+                $("#hide").click(function(){
+                    $("#tekst").hide();
+                });
+                $("#shwo").click(function(){
+                    $("#tekst").show();
+                });
+                $("#FadeIn").click(function(){
+                    $("#tekst").fadeIn();
+                });
+                $("#FadeOut").click(function(){
+                    $("#tekst").fadeOut();
+                });
+                $("#Toggle").click(function(){
+                    $("#tekst").toggle();
+                });
+                $("#SlideUp").click(function(){
+                    $("#tekst").slideUp();
+                });
+                $("#SlideDown").click(function(){
+                    $("#tekst").slideDown();
+                });
+                $("#SlideToggle").click(function(){
+                    $("#tekst").slideToggle();
+                });
+        })
+    </script>
+</head>
+<body>
+    <button id="hide">Hide</button>
+    <button id="shwo">Shwo</button>
+    <button id="Toggle">Toggle</button>
+    <button id="FadeIn">FadeIn</button>
+    <button id="FadeOut">FadeOut</button>
+    <button id="SlideUp">SlideUp</button>
+    <button id="SlideDown">SlideDown</button>
+    <button id="SlideToggle">SlideToggle</button>
+    <p id="tekst">tekst</p>
+</body>
+</html>

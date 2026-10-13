@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie 9</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#kod").on("keyup", function(){
+                console.log("vrnvgrjk");
+                let tekst = $(this).val();
+                count = 10-tekst.length;
+                $("#pozostalo").text("Pozostało znaków: "+ count);
+                if(count < 0){
+                    $("#pozostalo").addClass("blad");
+                }else{
+                    $("#pozostalo").removeClass("blad");
+                }
+                if(event.key == "Enter"){
+                    if(tekst == "admin"){
+                        $("#status").text("Dostep przyznany!");
+                        $("#status").addClass("ok");
+                    }else{
+                        $("#status").text("Bledny Kod!");
+                        $("#status").addClass("blad");
+                    }
+                }
+                if(event.key == "Escape"){
+                    $(this).val("");
+                    count = 10;
+                    $("#pozostalo").text("Pozostało znaków: "+ count);
+                    if($("#pozostalo").hasClass("blad")){
+                        $("#pozostalo").removeClass("blad");
+                    }
+                }
+            })
+        })
+    </script>
+    <style>
+            body { font-family: Arial, sans-serif; max-width: 640px; margin: 25px auto; }
+            #panel p { margin: 4px 0; }
+            #ekran { width: 400px; height: 150px; border: 2px solid #333; margin: 12px 0; }
+            #pasekTlo { width: 100%; height: 22px; background-color: #eeeeee; }
+            #pasek { width: 0; height: 22px; background-color: steelblue; }
+            .ok { color: green; font-weight: bold; }
+            .blad { color: crimson; font-weight: bold; }
+    </style>
+</head>
+<body>
+<label>Text <input type="text" id="kod"></label>
+<p id="status">---</p>
+<p id="pozostalo">Pozostalo znakow: 10</p>
+</body>
+</html>

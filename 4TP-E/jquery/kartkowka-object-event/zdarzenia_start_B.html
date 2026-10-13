@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Zdarzenia w jQuery – wersja B</title>
+        <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+         crossorigin="anonymous">
+        </script>
+        <script>
+            $(function(){
+                let count = 10;
+                $(document).on("keydown keyup", function(){
+                    $("#typ").text(event.type);
+                    $("#klawisz").text(event.key);
+                })
+                $("#ekran").on("mousemove", function(){
+                    $("#x").text(event.pageX);
+                    $("#y").text(event.pageY);
+                })
+                $(".akcja").click(function(){
+                    $("#ostatniaAkcja").text("Ostatnia akcja: " + $(this).text());
+                })
+                $("#kod").on("keyup", function(){
+                    console.log("vrnvgrjk");
+                    let tekst = $(this).val();
+                    count = 10-tekst.length;
+                    $("#pozostalo").text("Pozostało znaków: "+ count);
+                    if(count == 0){
+                        $("#pozostalo").addClass("blad");
+                    }
+                    if(event.key == "Enter"){
+                        if(tekst == "admin"){
+                            $("#status").text("Dostep przyznany!");
+                            $("#status").addClass("ok");
+                        }else{
+                            $("#status").text("Bledny Kod!");
+                            $("#status").addClass("blad");
+                        }
+                    }
+                    if(event.key == "Escape"){
+                        $(this).val("");
+                        count = 10;
+                        $("#pozostalo").text("Pozostało znaków: "+ count);
+                        if($("#pozostalo").hasClass("blad")){
+                            $("#pozostalo").removeClass("blad");
+                        }
+                    }
+                })
+                $("#losuj").click(function(){
+                    let rand = Math.floor(Math.random() * (100 - 10 + 1)) + 10
+                    console.log(rand);
+                    $("#pasek").css("width",rand+"%")
+                    $("#procent").text(rand)
+                })
+                $("#tryb").change(function(){
+                    if(this.checked){
+                        $("#start").removeAttr("disabled");
+                    }else{
+                        $("#start").attr("disabled", "disabled");
+                    }
+                })
+                $("#start").click(function(){
+                    alert("Panel urochomiony!");
+                })
+            });
+        </script>
+        <style>
+            body { font-family: Arial, sans-serif; max-width: 640px; margin: 25px auto; }
+            #panel p { margin: 4px 0; }
+            #ekran { width: 400px; height: 150px; border: 2px solid #333; margin: 12px 0; }
+            #pasekTlo { width: 100%; height: 22px; background-color: #eeeeee; }
+            #pasek { width: 0; height: 22px; background-color: steelblue; }
+            .ok { color: green; font-weight: bold; }
+            .blad { color: crimson; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <h1>Panel dostępu</h1>
+
+        <div id="panel">
+            <p>Typ zdarzenia: <span id="typ">---</span></p>
+            <p>Wciśnięty klawisz: <span id="klawisz">---</span></p>
+            <p>Pozycja myszy: X = <span id="x">---</span>, Y = <span id="y">---</span></p>
+            <p id="ostatniaAkcja">Ostatnia akcja: brak</p>
+        </div>
+
+        <div id="ekran"></div>
+        <button class="akcja">Start</button>
+        <button class="akcja">Stop</button>
+        <button class="akcja">Reset</button>
+
+        <hr>
+        <input type="text" id="kod" placeholder="Kod dostępu">
+        <p id="pozostalo">Pozostało znaków: 10</p>
+        <p id="status">---</p>
+
+        <hr>
+        <button id="losuj">Losuj moc sygnału</button>
+        <p>Moc sygnału: <span id="procent">0</span>%</p>
+        <div id="pasekTlo"><div id="pasek"></div></div>
+
+        <hr>
+        <input type="checkbox" id="tryb">
+        <label for="tryb">Tryb serwisowy</label>
+        <button id="start" disabled>Uruchom panel</button>
+    </body>
+</html>
