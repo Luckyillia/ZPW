@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie 12</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#newsletter").change(function(){
+                if($(this).is(":checked")){
+                    $("#stan").text("Zapisno")
+                }else{
+                    $("#stan").text("Wypisano")
+                }
+            })
+            $("#akcept").change(function(){
+                if($("#akcept").is(":checked")){
+                    $("#reg").prop("disabled", false)
+                }else{
+                    $("#reg").prop("disabled", true)
+                }
+            });
+            $("#tekst").on("input", function(){
+                $("#podglad").text($(this).val())
+            });
+            $("#komentarz").on("input", function(){
+                    let tekst = $(this).val();
+                    count = 100-tekst.length;
+                    $("#count").text(count);
+                    if(count <= 10){
+                        $("#count").addClass("blad");
+                    }else{
+                        $("#count").removeClass("blad");
+                    }
+                })
+        })
+    </script>
+    <style>
+        .ok { color: green; font-weight: bold; }
+        .blad { color: crimson; font-weight: bold; }
+    </style>
+</head>
+<body>
+   <input type="checkbox" id="newsletter">Chce newsletter
+   <p id="stan"></p>
+   <hr>
+   <input type="checkbox" id="akcept">Akceptuj regulamin
+   <button id="reg" disabled>Zarejestruj</button>
+   <p id="stan"></p>
+   <hr>
+   <input type="text" id="tekst">
+   <p>Podglad: <span id="podglad"></span></p>
+   <hr>
+   <textarea id="komentarz" maxlength="100"></textarea>
+   <p>Pozostalo znakow: <span id="count">100</span></p>
+</body>
+</html>

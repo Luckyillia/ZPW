@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie 11</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#form").submit(function(e){
+                e.preventDefault();
+                if($("#nick").val() === ""){
+                    $("#info").text("Pdaj nick")
+                }else{
+                    $("#info").text("Wyslano")
+                    $("#nick").val("")
+                }
+            })
+            $("#login").submit(function(e){
+                e.preventDefault();
+                let haslo = $("#haslo").val()
+                if(haslo.length < 6){
+                    $("#komunikat").text("haslo nie jest poprawne")
+                    $("#komunikat").css({"color":"red"})
+                }else{
+                    $("#komunikat").text("zalogowano")
+                    $("#komunikat").css({"color":"lightgreen"})
+                    $("#email").val("")
+                    $("#haslo").val("")
+                }
+            })
+            $("#kolor").change(function(){
+                $("body").css("background-color", $(this).val())
+            })
+            $("#pizza").change(function(){
+                $("#cena").text($(this).val())
+            })
+        })
+    </script>
+    <style>
+    </style>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="nick" placeholder="Nick">
+        <button type="submit">Wuslij</button>
+    </form>
+    <p id="info"></p>
+    <hr>
+    <form id="login">
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="password" id="haslo" placeholder="Haslo">
+        <button type="submit">Wuslij</button>
+    </form>
+    <p id="komunikat"></p>
+    <hr>
+    <select id="kolor">
+        <option value="white">white</option>
+        <option value="yellow">yellow</option>
+        <option value="lightblue">lightblue</option>
+    </select>
+    <hr>
+    <h1>Kup pizze</h1>
+    <select id="pizza">
+        <option value="0">-</option>
+        <option value="20">Small</option>
+        <option value="30">Medium</option>
+        <option value="40">Big</option>
+    </select>
+    <p>Do zaplaty: <span id="cena">0</span> zl</p>
+    <hr>
+</body>
+</html>
