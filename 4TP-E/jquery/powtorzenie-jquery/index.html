@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Powtorzenie JQuery</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#szukaj").on("keyup", function(){
+                if(event.key == "Enter"){
+                    let val = $(this).val().trim();
+                    if(val !== "" || event.type == "keydown"){
+                        $("#wynik").text("Szukam: " + val)
+                        $("#wynik").addClass("ok")
+                        $("#wynik").removeClass("blad")
+                    }else{
+                        $("#wynik").text("Wpisz fraze!")
+                        $("#wynik").addClass("blad")
+                        $("#wynik").removeClass("ok")
+                    }
+                }
+                if(event.key == "Escape"){
+                    $(this).val("");
+                    $("#wynik").text("");
+                }
+            })
+            $("#haslo").on("input", function(){
+                let haslo = $(this).val().trim().length;
+                console.log("haslo on input");
+                if(haslo < 6){
+                    console.log("Słabe");
+                    $("#sila").text("Słabe");
+                    $("#sila").addClass("blad")
+                    $("#sila").removeClass("ok")
+                    $("#sila").removeClass("warning")
+                }else if(haslo >= 6 && haslo <= 9){
+                    console.log("Średnie");
+                    $("#sila").text("Średnie");
+                    $("#sila").addClass("warning")
+                    $("#sila").removeClass("ok")
+                    $("#sila").removeClass("bald")
+                }else if(haslo >= 10){
+                    console.log("Silne");
+                    $("#sila").text("Silne");
+                    $("#sila").addClass("ok")
+                    $("#sila").removeClass("warning")
+                    $("#sila").removeClass("blad")
+                }
+            })
+            $("#logowanie").submit(function(e){
+                e.preventDefault();
+                let haslo = $("#pass").val().trim();
+                let login = $("#login").val().trim();
+                if(login == "" || haslo == ""){
+                    $("#info").text("Wypelni wszystkie pola");
+                    $("#info").removeClass("ok")
+                    $("#info").addClass("blad")
+                }else if(haslo.length < 6){
+                    $("#info").text("Haslo za krotkie");
+                    $("#info").removeClass("ok")
+                    $("#info").addClass("blad")
+                }else{
+                    $("#info").text("Witaj: "+login);
+                    $("#info").removeClass("blad")
+                    $("#info").addClass("ok")
+                }
+            })
+        })
+    </script>
+    <style>
+        .ok { color: green; font-weight: bold; }
+        .blad { color: crimson; font-weight: bold; }
+        .warning { color: orange; font-weight: bold; }
+    </style>
+</head>
+<body>
+    Zadanie 1: Wyszukiwarka z klawiszami<br>
+
+    <input type="text" id="szukaj" placeholder="Szukaj...">
+    <p id="wynik"></p>
+
+    Po wciśnięciu Enter wypisz w #wynik: „Szukam: [tekst]”. Jeśli pole jest puste (po trim()), wypisz „Wpisz frazę!” na czerwono.<br>
+    Po wciśnięciu Escape wyczyść pole i #wynik.<br>
+    <hr>
+    Zadanie 2: Limit długości hasła<br>
+
+    <input type="password" id="haslo">
+    <p id="sila"></p>
+
+    Przy każdym zdarzeniu input sprawdzaj długość hasła:<br>
+    -mniej niż 6 znaków → „Słabe”, klasa .slabe (czerwone tło),<br>
+    -6–9 znaków → „Średnie”, klasa .srednie (pomarańczowe),<br>
+    -10 i więcej → „Silne”, klasa .silne (zielone).<br>
+    <hr>
+    Zadanie 3: Formularz logowania<br>
+
+    <form id="logowanie">
+    <input type="text" id="login" placeholder="Login">
+    <input type="password" id="pass" placeholder="Hasło">
+    <button type="submit">Zaloguj</button>
+    </form>
+    <p id="info"></p>
+
+    Zablokuj wysłanie formularza (preventDefault). Jeśli login jest pusty → „Podaj login”. Jeśli hasło ma mniej niż 6 znaków → „Hasło za krótkie”. W przeciwnym razie → „Witaj, [login]!” na zielono.<br>
+    <hr>
+    Zadanie 4: Wybór rozmiaru czcionki<br>
+
+    <select id="rozmiar">
+        <option value="14">Mały</option>
+        <option value="20">Średni</option>
+        <option value="28">Duży</option>
+    </select>
+    <p id="tekst">Przykładowy tekst akapitu.</p>
+
+    Po zmianie opcji ustaw font-size akapitu #tekst na wybraną wartość w pikselach. Dodatkowo wypisz pod spodem „Aktualny rozmiar: X px”.<br>
+    <hr>
+    Zadanie 5: Zamówienie z dodatkami<br>
+
+    <label><input type="checkbox" class="dodatek" value="3"> Ser (3 zł)</label>
+    <label><input type="checkbox" class="dodatek" value="5"> Szynka (5 zł)</label>
+    <label><input type="checkbox" class="dodatek" value="4"> Pieczarki (4 zł)</label>
+    <p>Cena: <span id="suma">20</span> zł</p>
+    <label><input type="checkbox" id="akcept"> Potwierdzam zamówienie</label>
+    <button id="zamow" disabled>Zamów</button>
+
+    Cena bazowa to 20 zł. Po zaznaczeniu lub odznaczeniu dodatku przelicz sumę (wskazówka: $(".dodatek:checked").each(...) i Number()).<br>
+    Przycisk „Zamów” jest aktywny tylko, gdy zaznaczono #akcept.<br>
+    <hr>
+    Zadanie 6: Kalkulator BMI z walidacją<br>
+
+    <input type="text" id="waga" placeholder="Waga (kg)">
+    <input type="text" id="wzrost" placeholder="Wzrost (cm)">
+    <button id="licz">Oblicz</button>
+    <p id="bmi"></p>
+
+    Po kliknięciu sprawdź:<br>
+    <br>
+    czy oba pola są wypełnione (trim()),<br>
+    czy to liczby (isNaN),<br>
+    czy waga mieści się w zakresie 20–300, a wzrost w zakresie 100–250.<br>
+
+    Przy błędzie wypisz odpowiedni komunikat na czerwono. Jeśli wszystko jest w porządku, wylicz BMI (waga / (wzrost/100)²), zaokrąglij do 1 miejsca (toFixed(1)) i wypisz wynik.<br>
+
+</body>
+</html>
