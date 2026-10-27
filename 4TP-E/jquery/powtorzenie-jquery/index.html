@@ -67,6 +67,12 @@
                     $("#info").addClass("ok")
                 }
             })
+            $("#rozmiar").change(function(){
+                console.log("change")
+                let size = $(this).val();
+                $("#tekst").css("font-size", size+"px")
+                $("#size").text(size);
+            })
         })
     </script>
     <style>
@@ -113,6 +119,7 @@
         <option value="28">Duży</option>
     </select>
     <p id="tekst">Przykładowy tekst akapitu.</p>
+    <p id="info2">Aktualny rozmiat: <span id="size"></span></p>
 
     Po zmianie opcji ustaw font-size akapitu #tekst na wybraną wartość w pikselach. Dodatkowo wypisz pod spodem „Aktualny rozmiar: X px”.<br>
     <hr>
